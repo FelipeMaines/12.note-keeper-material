@@ -6,6 +6,10 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatButtonModule} from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
+import { CoreModule } from './core/core.module';
+import { DashboardModule } from './views/dashboard/dashboard.module';
+import { SharedModule } from './shared/shared.module';
+import { provideHttpClient } from '@angular/common/http';
 
 
 
@@ -17,11 +21,12 @@ import {MatCardModule} from '@angular/material/card';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MatButtonModule,
-    MatCardModule
+    SharedModule,
+    CoreModule,
+    DashboardModule
     
   ],
-  providers: [],
+  providers: [provideHttpClient()],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
