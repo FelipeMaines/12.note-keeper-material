@@ -1,4 +1,4 @@
-import { NgModule, inject } from '@angular/core';
+import { NgModule, inject, resolveForwardRef } from '@angular/core';
 import { ActivatedRouteSnapshot, ResolveFn, RouterModule, Routes } from '@angular/router';
 import { ListarCategoriasComponent } from './listar-categorias/listar-categorias.component';
 import { InserirCategoriaComponent } from './inserir-categoria/inserir-categoria.component';
@@ -9,13 +9,18 @@ import { createInjectableType } from '@angular/compiler';
 import { CategoriasService } from './services/categoria.service';
 
 const FormsCategoriaResolver: ResolveFn<Categoria> = (route: ActivatedRouteSnapshot) => {
-  return inject(CategoriasService).selecionarPorId(route.paramMap.get('id')!);
+  return inject(CategoriasService).selecionarPorId(parseInt(route.paramMap.get('id')!));
+}
+
+const ListarCategoriasResolver: ResolveFn<Categoria[]> = () => {
+  return inject(CategoriasService).selecionarTodos();
 }
 
 const routes: Routes = [
   {
     path: 'listar',
-    component: ListarCategoriasComponent
+    component: ListarCategoriasComponent,
+    resolve: {categorias: ListarCategoriasResolver}
   },
   {
     path: 'inserir',

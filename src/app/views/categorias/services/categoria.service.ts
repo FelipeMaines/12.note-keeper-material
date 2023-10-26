@@ -28,7 +28,7 @@ export class CategoriasService {
     return this.http.delete<Categoria>(url);
   }
 
-  selecionarPorId(id: string): Observable<Categoria> {
+  selecionarPorId(id: number): Observable<Categoria> {
     const url = `${this.API_URL}/${id}`;
 
     return this.http.get<Categoria>(url);
